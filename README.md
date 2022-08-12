@@ -1,6 +1,10 @@
 # ww9scraper
-Script to download all images from www9 website to read comics without being bothered by ads
-So far only tested on One Piece specific site
-Allows you to go through every chapter in order and pick which ones to view, or search specific one
-When searching, low numbers are formatted as X00 or 0X0 (example: 002, 020)
-not a problem when you get to the hundreds/thousands
+A script originally intended to iterate through the html structure of https://ww9.readonepiece.com/, so I could download the pages of each chapter
+to my computer locally and read offline/without ads.
+
+Script will allow the user to choose a specific chapter, or go through all availible chapters and pick one, which will then download to a location
+on user's computer.
+
+In the current build, websites with the same structure as the original work as well.
+
+TODO: Put program into an executable, create gui to allow user to select series and chapter. May want to create text file with necessary urls.
