@@ -71,6 +71,8 @@ def subPage(url): #gets every image from the sub-page
 
 
 if __name__ == "__main__":
+
+    gui.Window(title="Hello World", layout=[[]], margins=(100, 50)).read()
     
     parser = argparse.ArgumentParser(description='Download all images of a chapter from ww9')
     parser.add_argument('-c', '--chapter', help='Specific chapter to download. Format: [00X, 0XX, XXX, XXXX]')

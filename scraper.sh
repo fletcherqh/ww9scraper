@@ -1,3 +1,0 @@
-#!/bin/bash
-echo Running web scraper...
-python3 main.py $1 $2
