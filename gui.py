@@ -3,15 +3,17 @@ import re
 
 def numTransform(num):
     x = re.search("0[0-9][0-9]", num)
-    print(x)
+    pass
 
 def loadGUI():
+    global info
+
     window = tk.Tk()
-    label = tk.Label(text="Name")
+    label = tk.Label(text="Chapter")
     entry = tk.Entry()
     label.pack()
     entry.pack()
-    button = tk.Button(text="Click me!")
+    button = tk.Button(text="select")
     button.pack()
     #window setup
     
@@ -20,11 +22,12 @@ def loadGUI():
         window.destroy()
         print(f"You have chosen chapter {info}!")
         return info
-    button.bind("<Button-1>", handle_click)
+    number = button.bind("<Button-1>", handle_click)
     #button function
     
     window.mainloop()
     #start window
-#loadGUI()
-numTransform("030")
+    return number
+
+print(loadGUI())
     

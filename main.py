@@ -4,6 +4,7 @@ import requests
 import argparse
 import sys
 import urllib.request
+from gui import loadGUI
 
 
 def mainPage(url): #will get list of every chapter from the main page
@@ -14,7 +15,9 @@ def mainPage(url): #will get list of every chapter from the main page
 
     myList = soup.findAll('a', attrs={'class':'text md:text-lg font-bold mb-1 text-text-normal'})
 
-    if not args.chapter: #Will go through all chapters in order, then ask if you want to view. type stop to break loop
+    chapter = loadGUI()
+
+    if chapter == None: #Will go through all chapters in order, then ask if you want to view. type stop to break loop
         for i in myList[::-1]:
             
             subUrl = i['href']
@@ -38,7 +41,7 @@ def mainPage(url): #will get list of every chapter from the main page
             subUrl = i['href']
             
             #if subUrl == "https://ww9.readonepiece.com/chapter/one-piece-chapter-" + args.chapter:
-            if subUrl == "https://ww2.readkaguyasama.com/chapter/kaguya-sama-love-is-war-chapter-" + args.chapter:
+            if subUrl == "https://ww2.readkaguyasama.com/chapter/kaguya-sama-love-is-war-chapter-" + chapter:
 
                 print(f"Found chapter {args.chapter}!")
                 
@@ -71,12 +74,10 @@ def subPage(url): #gets every image from the sub-page
 
 
 if __name__ == "__main__":
-
-    gui.Window(title="Hello World", layout=[[]], margins=(100, 50)).read()
     
-    parser = argparse.ArgumentParser(description='Download all images of a chapter from ww9')
-    parser.add_argument('-c', '--chapter', help='Specific chapter to download. Format: [00X, 0XX, XXX, XXXX]')
-    args = parser.parse_args()
+    #parser = argparse.ArgumentParser(description='Download all images of a chapter from ww9')
+    #parser.add_argument('-c', '--chapter', help='Specific chapter to download. Format: [00X, 0XX, XXX, XXXX]')
+    #args = parser.parse_args()
     
     ww2url = "https://ww2.readkaguyasama.com/manga/kaguya-sama-love-is-war/"
     ww9url = "https://ww9.readonepiece.com/manga/one-piece/"
