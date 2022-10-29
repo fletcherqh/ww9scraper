@@ -38,23 +38,22 @@ def mainPage(url): #will get list of every chapter from the main page
     else:  #allows you to pick a specific chapter
         print("Looking for selected chapter...")
         
-        webpage = "https://ww2.readkaguyasama.com/chapter/kaguya-sama-love-is-war-chapter-"
+        #webpage = "https://ww2.readkaguyasama.com/chapter/kaguya-sama-love-is-war-chapter-"
         
-        chapter = webpage + chapter
-        binarySearch(myList, chapter, 0, len(myList)-1)
+        #chapter = webpage + chapter
         
-        #for i in myList:
-        #    
-        #    subUrl = i['href']
-        #    
-        #    if subUrl == "https://ww2.readkaguyasama.com/chapter/kaguya-sama-love-is-war-chapter-" + chapter:
-#
-        #        print(f"Found chapter {args.chapter}!")
-        #        
-        #        subPage(subUrl)
-        #        sys.exit(1)
-        #    
-        #print(f"Could not find chapter {args.chapter}")
+        for i in myList:
+            
+            subUrl = i['href']
+            
+            if subUrl == "https://ww2.readkaguyasama.com/chapter/kaguya-sama-love-is-war-chapter-" + chapter:
+
+                print(f"Found chapter {args.chapter}!")
+                
+                subPage(subUrl)
+                sys.exit(1)
+            
+        print(f"Could not find chapter {args.chapter}")
 
 
 
