@@ -14,6 +14,14 @@ def mainPage(url): #will get list of every chapter from the main page
     myList = soup.findAll('a', attrs={'class':'text md:text-lg font-bold mb-1 text-text-normal'})
     myList = (myList[::-1]) #reverse list from bottom to top and enumerate
 
+    #change chapter number to new format
+    if int(args.chapter) < 10:
+        chapter = "00" + str(args.chapter)
+    elif int(args.chapter) < 100:
+        chapter = "0" + str(args.chapter)
+
+    print(chapter)
+
     if args.chapter == None: #Will go through all chapters in order, then ask if you want to view. type stop to break loop
         for i in myList:
             
@@ -38,7 +46,7 @@ def mainPage(url): #will get list of every chapter from the main page
             
             subUrl = i['href']
             
-            if subUrl == "https://ww9.readonepiece.com/chapter/one-piece-chapter-" + args.chapter:
+            if subUrl == "https://ww9.readonepiece.com/chapter/one-piece-chapter-" + chapter:
 
                 print(f"Found chapter {args.chapter}!")
                 
@@ -96,7 +104,6 @@ if __name__ == "__main__":
     parser.add_argument('-p', '--path', help='path to download files')
     args = parser.parse_args()
     
-    ww2url = "https://ww2.readkaguyasama.com/manga/kaguya-sama-love-is-war/"
     ww9url = "https://ww9.readonepiece.com/manga/one-piece/"
 
-    mainPage(args.url)
+    mainPage(ww9url)
