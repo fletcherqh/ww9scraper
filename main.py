@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import argparse
 import sys
+import os
 import urllib.request
 #from gui import loadGUI
 
@@ -19,8 +20,8 @@ def mainPage(url): #will get list of every chapter from the main page
         chapter = "00" + str(args.chapter)
     elif int(args.chapter) < 100:
         chapter = "0" + str(args.chapter)
-
-    print(chapter)
+    else:
+        chapter = args.chapter
 
     if args.chapter == None: #Will go through all chapters in order, then ask if you want to view. type stop to break loop
         for i in myList:
@@ -42,7 +43,7 @@ def mainPage(url): #will get list of every chapter from the main page
     else:  #allows you to pick a specific chapter
         print("Looking for selected chapter...")
         
-        for i in myList:
+        for i in myList[int(chapter)-1:]:
             
             subUrl = i['href']
             
@@ -66,6 +67,9 @@ def subPage(url): #gets every image from the sub-page
     myList = soup.findAll('img', attrs={'class':'mb-3 mx-auto js-page'})
 
     print('Getting images...')
+
+    filePath = f"{args.path}/Chapter {args.chapter}"
+    os.mkdir(filePath) #make a directory here
     
     pagenum = 0
     for i in myList:
@@ -74,7 +78,7 @@ def subPage(url): #gets every image from the sub-page
         print(image_url)
 
         img_data = requests.get(image_url).content
-        with open(f'{args.path}/page{pagenum}.jpg', 'wb') as handler:
+        with open(f'{filePath}/page{pagenum}.jpg', 'wb') as handler:
             handler.write(img_data)
 
 def binarySearch(arr, left, right, chapter):
@@ -100,7 +104,7 @@ if __name__ == "__main__":
     
     parser = argparse.ArgumentParser(description='Download all images of a chapter from ww9')
     parser.add_argument('-c', '--chapter', help='Specific chapter to download. Format: [00X, 0XX, XXX, XXXX]')
-    parser.add_argument('-u', '--url', help='url of main page')
+    #parser.add_argument('-u', '--url', help='url of main page')
     parser.add_argument('-p', '--path', help='path to download files')
     args = parser.parse_args()
     
