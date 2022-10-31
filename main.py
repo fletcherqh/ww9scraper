@@ -3,8 +3,6 @@ import requests
 import argparse
 import sys
 import os
-import gui
-
 
 def mainPage(url): #will get list of every chapter from the main page
     site = requests.get(url)
@@ -15,7 +13,9 @@ def mainPage(url): #will get list of every chapter from the main page
     myList = (myList[::-1]) #reverse list from bottom to top and enumerate
 
     #change chapter number to new format
-    if int(args.chapter) < 10:
+    if args.chapter == None:
+        chapter = 0
+    elif int(args.chapter) < 10:
         chapter = "00" + str(args.chapter)
     elif int(args.chapter) < 100:
         chapter = "0" + str(args.chapter)
@@ -42,7 +42,7 @@ def mainPage(url): #will get list of every chapter from the main page
     else:  #allows you to pick a specific chapter
         print("Looking for selected chapter...")
         
-        for i in myList[int(chapter)-1:]:
+        for i in myList[int(chapter)-1:]: #checking certain range due to decimal chapters
             
             subUrl = i['href']
             
@@ -107,12 +107,10 @@ if __name__ == "__main__":
     
     parser = argparse.ArgumentParser(description='Download all images of a chapter from ww9')
     parser.add_argument('-c', '--chapter', help='Specific chapter to download. Format: [00X, 0XX, XXX, XXXX]')
-    #parser.add_argument('-u', '--url', help='url of main page')
+    #parser.add_argument('-u', '--url', help='url of main page') not needed right now
     parser.add_argument('-p', '--path', help='path to download files')
     args = parser.parse_args()
     
     ww9url = "https://ww9.readonepiece.com/manga/one-piece/"
-
-    gui.loadGUI()
 
     mainPage(ww9url)
