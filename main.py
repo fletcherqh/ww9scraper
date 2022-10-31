@@ -3,8 +3,7 @@ import requests
 import argparse
 import sys
 import os
-import urllib.request
-#from gui import loadGUI
+import gui
 
 
 def mainPage(url): #will get list of every chapter from the main page
@@ -66,11 +65,15 @@ def subPage(url): #gets every image from the sub-page
 
     myList = soup.findAll('img', attrs={'class':'mb-3 mx-auto js-page'})
 
+    try:
+        filePath = f"{args.path}/Chapter {args.chapter}"
+        os.mkdir(filePath) #make a directory here
+    except:
+        print('File path not found')
+        sys.exit(1)
+
     print('Getting images...')
 
-    filePath = f"{args.path}/Chapter {args.chapter}"
-    os.mkdir(filePath) #make a directory here
-    
     pagenum = 0
     for i in myList:
         pagenum += 1
@@ -83,7 +86,7 @@ def subPage(url): #gets every image from the sub-page
 
 def binarySearch(arr, left, right, chapter):
     #base case
-    if r >= l:
+    if right >= left:
  
         mid = left + (right - left) // 2
  
@@ -91,10 +94,10 @@ def binarySearch(arr, left, right, chapter):
             return arr[mid]
  
         elif arr[mid]['href'] > chapter:
-            return binarySearch(arr, left, mid-1, x)
+            return binarySearch(arr, left, mid-1, chapter)
  
         else:
-            return binarySearch(arr, mid+1, right, x)
+            return binarySearch(arr, mid+1, right, chapter)
  
     else: #if element not in array
         return -1
@@ -109,5 +112,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     ww9url = "https://ww9.readonepiece.com/manga/one-piece/"
+
+    gui.loadGUI()
 
     mainPage(ww9url)

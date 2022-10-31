@@ -1,9 +1,4 @@
 import tkinter as tk
-import re
-
-def numTransform(num):
-    x = re.search("0[0-9][0-9]", num)
-    pass
 
 def loadGUI():
     global info
