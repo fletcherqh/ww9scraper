@@ -7,6 +7,6 @@ on user's computer.
 
 In the current build, websites with the same structure as the original work as well. Also currently using argparse to allow user to specify chapter on the command line.
 
-GUI in production using Tkinter.
+GUI made using Tkinter
 
-TODO: Put program into an executable, create gui to allow user to select series and chapter. May want to create text file with necessary urls.
+TODO: Put program into an executable, create text file with necessary urls. Would like to allow user to chose url in GUI
